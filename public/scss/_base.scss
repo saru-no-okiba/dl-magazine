@@ -1,0 +1,23 @@
+/*-------------------------------------------
+ base 
+-------------------------------------------*/
+body{
+  color: #333333;
+  font-family : "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+}
+a{
+  color: #337ab7;
+  text-decoration : none;
+}
+a:hover{
+  text-decoration : underline;
+}
+*:focus{
+  outline:solid 1px #337ab7;
+}
+
+.container{
+  max-width: 1296px;
+  padding: 0 0.5rem;
+  margin: 0 auto;
+}

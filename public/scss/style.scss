@@ -1,0 +1,798 @@
+@charset "utf-8";
+
+@use "reset";
+/*@use "base";*/
+@use "variables" as v;
+
+/////////////// height ///////////////
+$head_height:48px;
+$foot_height:48px;
+$main_height:calc(100vh - (#{$head_height} + #{$foot_height}));
+
+/////////////// width ///////////////
+$result_width:400px;
+$tmb_width:120px;
+
+/////////////// z-index ///////////////
+$z-indexs:(
+  'arrow_btn':1000000,
+  'viewer':100000,
+);
+
+/////////////// base ///////////////
+body{
+  color: #333333;
+  font-family : "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+}
+a{
+  color: #337ab7;
+  text-decoration : none;
+}
+a:hover{
+  text-decoration : underline;
+}
+*:focus{
+  outline:solid 1px #337ab7;
+}
+.container{
+  max-width: 1296px;
+  padding: 0 0.5rem;
+  margin: 0 auto;
+}
+//////////////////////////////////////
+header{
+  h1{
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 0.5rem;
+    font-weight: bold;
+    font-size: 28px;
+    color: #ffffff;
+    background: v.$mainColor;
+    box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    span{
+      padding-right: 1rem;
+    }
+  }
+}
+//////////////////////////////////////
+footer{
+  height: 80px;
+}
+#pagetop {
+  position: fixed;
+  right: 40px;
+  bottom: 20px;
+  z-index: 5500;
+  display: block;
+  width: 42px;
+  height:42px;
+  cursor: pointer;
+  /*background: rgba(v.$mainColor,.5);*/
+  background: v.$mainColor;
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  opacity: 0;
+  transition: .5s;
+  @media (max-width:479px) {
+    right: 5px;
+    bottom: 10px;
+  }
+}
+
+#pagetop span {
+  position: absolute;
+  top: 16px;
+  left: 11px;
+  display: block;
+  width:18px;
+  height:18px;
+  content:"";
+  border-top:3px solid #ffffff;
+  border-right:3px solid #ffffff;
+  -webkit-transform: rotate(315deg);
+  transform: rotate(315deg);
+}
+
+button{
+  padding: 0.5rem 1rem;
+  font-size: 18px;
+  color: #ffffff;
+  background: v.$mainColor;
+  border: 2px solid v.$mainColor;
+  cursor: pointer;
+  &:hover{
+    background: #ffffff;
+    color: v.$mainColor;
+    transition: 0.5s;
+  }
+}
+input{
+  accent-color:v.$mainColor;
+}
+//////////////////////////////////////
+#note{
+  padding-top: 104px;
+  padding-bottom: 1rem;
+  p{
+    line-height: 2rem;
+  }
+  @media (max-width:479px) {
+    padding-top: 128px;
+  }
+}
+#pamphlet{
+  padding: 1rem 0;
+  text-align: center;
+  a{
+    margin: 0.5rem;
+    padding: 1rem 2rem 1rem 1rem;
+    display: inline-block;
+    color: #ffffff;
+    background: v.$mainColor;
+    border: 2px solid v.$mainColor;
+    border-radius: 4px;
+    span{
+      position: relative;
+      &::after{
+        position: absolute;
+        top:0;
+        width: 16px;
+        height: 16px;
+        content: "";
+        background: url("../images/ico-link.png") no-repeat;
+        background-size: contain;
+      }
+    }
+    &:hover{
+      color: v.$mainColor;
+      background: #ffffff;
+      text-decoration: none;
+      span:after{
+        filter: brightness(0) saturate(100%) invert(34%) sepia(100%) saturate(401%) hue-rotate(170deg) brightness(92%) contrast(86%);
+      }
+    }
+  }
+}
+#ico-checkbox{
+  width: 100%;
+  height: auto;
+  max-width: 20px;
+  vertical-align: middle;
+  margin-bottom: 4px;
+}
+//////////////////////////////////////
+#score{
+  padding: 0 1rem 0 0.25rem;
+  font-size: 20px;
+  @media (max-width:479px) {
+    padding: 0 1rem 0 0;
+  }
+  img{
+    max-height: 18px;
+  }
+  ul{
+    padding-left: 1.5rem;
+    font-size: 16px;
+    @media (max-width:479px) {
+      padding-left: 0;
+    }
+  }
+  li{
+    padding: 0.15rem;
+    &:first-child{
+      font-size: 18px;
+      list-style-type: disc;
+      @media (max-width:479px) {
+        padding-bottom: 1rem;
+        list-style-type: none;
+      }
+    }
+  }
+
+    /*
+  .score-th{
+    position: relative;
+    width: 8rem;
+    display: inline-block;
+  }
+  */
+  .score-th::after{
+    /*
+    position: absolute;
+    top:0;
+    right: 0;
+    */
+    content: "：";
+  }
+  .score-num{
+    padding: 0 4px;
+    font-size: 18px;
+  }
+}
+#new-btn{
+  position: relative;
+  padding-left: 1.5rem;
+  display: block;
+  font-size: 14px;
+  background: transparent;
+  border-color: transparent;
+  color: v.$mainColor;
+  &::before{
+    position: absolute;
+    top:1rem;
+    left: 0.75rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    content: "";
+    border: 2px solid v.$mainColor;
+    border-left: 0;
+    border-bottom: 0;
+    transform: translateY(-25%) rotate(45deg);
+  }
+  &:focus{
+    outline:1px solid transparent;
+  }
+  &:hover::before{
+    border-color: v.$mainColor;
+  }
+}
+
+.dl-wrap{
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  button{
+    position: relative;
+    width: 300px;
+    padding-left: 40px;
+    margin: 0.5rem;
+    font-size: 20px;
+    border-radius: 4px;
+    &::before{
+      position: absolute;
+      top:8px;
+      left: 4px;
+      width: 25px;
+      height: 25px;
+      content: "";
+      background: url('../images/ico-download.png') no-repeat;
+      background-size: contain;
+    }
+    &:hover{
+      transition: 0.5s;
+      &::before{
+        transition:0.5s;
+        filter: brightness(0) saturate(100%) invert(38%) sepia(11%) saturate(2929%) hue-rotate(172deg) brightness(97%) contrast(90%);
+      }
+    }
+  }
+
+  ////////////あとで削除//////////////////////
+  a{
+    position: relative;
+    width: 300px;
+    min-height: 50px;
+    padding-left: 40px;
+    margin: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #336CAC;
+    border: 2px solid #336CAC;
+    color: #ffffff;
+    font-size: 20px;
+    border-radius: 4px;
+    &::before{
+      position: absolute;
+      top:8px;
+      left: 4px;
+      width: 25px;
+      height: 25px;
+      content: "";
+      background: url('../images/ico-download.png') no-repeat;
+      background-size: contain;
+    }
+    &:hover{
+      text-decoration: none;
+      transition: 0.5s;
+      color: #336CAC;
+      background: #ffffff;
+      &::before{
+        transition:0.5s;
+        filter: brightness(0) saturate(100%) invert(38%) sepia(11%) saturate(2929%) hue-rotate(172deg) brightness(97%) contrast(90%);
+      }
+    }
+  }
+  //////////////////////////////////////
+}
+#list-foot .dl-wrap{
+  flex-direction: column;
+  align-content: center;
+  >div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+#search{
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
+  label{
+    width: 86px;
+    padding-right: 0.25rem;
+  }
+  input{
+    height: 40px;
+    width: calc(100% - 202px);
+    padding: 0.25rem 0.5rem;
+    background: v.$yellow;
+    border-radius: 4px 0 0 4px;
+    border: 1px solid v.$mainColor;
+    border-right-color:1px solid transparent ;
+  }
+  button{
+    width: 114px;
+    height: 40px;
+    &:hover{
+      transition: 0.5s;
+    }
+  }
+  #search-btn{
+    position: relative;
+    padding-left: 40px;
+    border-radius:0 4px 4px 0;
+    &::before{
+      position: absolute;
+      top:4px;
+      left: 4px;
+      width: 30px;
+      height: 30px;
+      content: "";
+      background: url('../images/ico-magnifier.png') no-repeat;
+      background-size: contain;
+    }
+    &:hover::before{
+      filter: brightness(0) saturate(100%) invert(38%) sepia(11%) saturate(2929%) hue-rotate(172deg) brightness(97%) contrast(90%);
+    }
+  }
+}
+//////////////////////////////////////
+#filter-btn-wrap{
+  margin: 0 auto;
+  max-width: 1108px;
+  display: flex;
+  align-items: center;
+}
+/////////////////////////////////////
+///ジャンル等open時のstyle
+///絞り込みボタンstyle
+%btn-filter{
+  position: relative;
+  padding-left: 1.5rem;
+  margin: 0.5rem 0.25rem;
+  font-size: 14px;
+  border-radius: 4px;
+  &::before{
+    position: absolute;
+    top: 50%;
+    left: 4px;
+    width: 16px;
+    height: 16px;
+    content: "";
+    transform: translateY(-50%);
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(2206%) hue-rotate(36deg) brightness(114%) contrast(107%);
+  }
+}
+/////////////////////////////////////
+#filter-toggleBtn{
+  position: relative;
+  padding-left: 1.5rem;
+  margin:0.5rem 1rem;
+  font-size: 14px;
+  border-radius: 4px;
+  &::before{
+    position: absolute;
+    top:1rem;
+    left: 0.75rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    content: "";
+    border: 2px solid #ffffff;
+    border-left: 0;
+    border-bottom: 0;
+    transform: translateY(-25%) rotate(135deg);
+  }
+  &.active::before{
+    transform: translateY(-25%) rotate(315deg);
+  }
+  &:focus{
+    outline:1px solid transparent;
+  }
+  &:hover::before{
+    border-color: v.$mainColor;
+  }
+}
+#not-corpBtn{
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding:0 0.75rem;
+  border-radius: 4px;
+  font-size: 14px;
+  border: 2px solid v.$mainColor;
+  color: #ffffff;
+  background: v.$mainColor;
+  &:hover{
+    color: v.$mainColor;
+    background: #ffffff;
+  }
+  &::before{
+    width: 24px;
+    height: 24px;
+    content: "";
+    background: url('../images/ico-not-corp.png') no-repeat;
+    background-size: contain;
+  }
+  &:hover::before{
+    filter: brightness(0) saturate(100%) invert(36%) sepia(71%) saturate(761%) hue-rotate(177deg) brightness(86%) contrast(81%);
+  }
+  &.not-disp::before{
+    background: url('../images/ico-corp.png') no-repeat;
+    background-size: contain;
+  }
+}
+#corp-toggle{
+  opacity: 0;
+}
+
+/////////////////////////////////////
+#filter-selected-wrap{
+  display: none;
+  padding: 1rem;
+  margin: 0 auto;
+  margin-top: 1rem;
+  max-width: 1108px;
+  background: #F7F7F7;
+  border: 1px dotted v.$mainColor;
+  border-radius: 4px;
+  &.active{
+    display: block;
+  }
+}
+#genre{
+  legend{
+    padding: 0 0.75rem;
+    margin-bottom: 0.75rem;
+    font-weight: bold;
+    border-bottom: double 6px v.$mainColor;
+  }
+  span{
+    display: inline-block;
+    padding:0.5rem;
+    label{
+      padding-left: 0.25rem;
+    }
+  }
+  button{
+    position: relative;
+    padding-left: 1.5rem;
+    margin: 0.5rem 0.25rem;
+    font-size: 14px;
+    border-radius: 4px;
+    &::before{
+      position: absolute;
+      top: 50%;
+      left: 4px;
+      width: 16px;
+      height: 16px;
+      content: "";
+      background: url('../images/ico-checkbox.png') no-repeat;//全選択
+      background-size: contain;
+      transform: translateY(-50%);
+      filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(2206%) hue-rotate(36deg) brightness(114%) contrast(107%);
+    }
+    &:nth-of-type(2)::before{//全解除
+      background: url('../images/ico-square.png') no-repeat;
+      background-size: contain;
+    }
+    &:hover::before{
+      filter: brightness(0) saturate(100%) invert(36%) sepia(71%) saturate(761%) hue-rotate(177deg) brightness(86%) contrast(81%);
+    }
+  }
+}
+#etc-wrap{
+  padding-top: 0.75rem;
+  margin-top: 0.75rem;
+  border-top: 1px dotted v.$mainColor;
+  button{
+    @extend %btn-filter;
+    &::before{
+      background: url('../images/ico-filter.png') no-repeat;
+      background-size: contain;
+    }
+    &:hover::before{
+      filter: brightness(0) saturate(100%) invert(36%) sepia(71%) saturate(761%) hue-rotate(177deg) brightness(86%) contrast(81%);
+    }
+  }
+}
+#foreign-books{
+}
+
+#reset-wrap{
+  padding-top: 1rem;
+  text-align: right;
+}
+#reset-btn{
+  border-radius: 4px;
+  &:hover{
+    transition: 0.5s;
+  }
+}
+//////////////////////////////////////
+#msg{
+  padding-top: 2rem;
+  margin-top: 1rem;
+  border-top: 1px dotted v.$black;
+}
+//////////////////////////////////////
+#display-opr{
+  padding-bottom: 0.5rem;
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+#sort{
+  padding: 0.5rem 0.25rem;
+}
+.count-display{
+  padding: 0 0.5rem;
+  font-size: 14px;
+}
+#select-count{
+  padding: 0 0.25rem;
+  span{
+    padding: 0 0.25rem;
+  }
+}
+#display-type{
+  margin-left: auto;
+  border-radius:4px;
+  &:has(#tbl-btn){
+    position: relative;
+    padding-left: 40px;
+    &::before{
+      position: absolute;
+      top:6px;
+      left: 4px;
+      width: 30px;
+      height: 30px;
+      content: "";
+      background: url('../images/ico-table.png');
+      background-size: contain;
+    }
+  }
+  &:has(#list-btn){
+    position: relative;
+    padding-left: 40px;
+    &::before{
+      position: absolute;
+      top:6px;
+      left: 4px;
+      width: 30px;
+      height: 30px;
+      content: "";
+      background: url('../images/ico-list.png');
+      background-size: contain;
+    }
+  }
+  &:hover{
+    transition: 0.5s;
+    &::before{
+      filter: brightness(0) saturate(100%) invert(38%) sepia(11%) saturate(2929%) hue-rotate(172deg) brightness(97%) contrast(90%);
+    }
+  }
+}
+#list-foot{
+  .count-pager{
+    padding-top: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.pagination{
+  display: flex;
+  a{
+    width: 38px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.25rem;
+    border: 1px solid v.$mainColor;
+    border-radius: 4px;
+    color: v.$mainColor;
+    cursor: pointer;
+    &:hover{
+      background: v.$gray;
+      text-decoration: none;
+    }
+  }
+  .disabled a{
+    pointer-events: none;
+    border-color: #f5f5f5;
+    background: #f5f5f5;
+
+  }
+  .pre a,.next a{
+    position: relative;
+  }
+  .pre a::before,.next a::before{
+    position: absolute;
+    left: 8px;
+    width: 12px;
+    height: 12px;
+    border-top: solid 2px v.$mainColor;
+    border-right: solid 2px v.$mainColor;
+    content: "";
+  }
+  .pre a::before{
+    left: 10px;
+    transform: rotate(-135deg);
+  }
+  .next a::before{
+    transform: rotate(45deg);
+  }
+  .disabled.pre a::before,.disabled.next a::before{
+    border-color: #c0c0c0;
+  }
+  .active a{
+    color: #ffffff;
+    background: v.$mainColor;
+  }
+}
+
+#list-body{
+  display: grid;
+  grid-template-columns: repeat(7, auto);
+  border-left: 1px solid v.$mainColor;
+  border-bottom: 1px solid v.$mainColor;
+  .new{
+    padding: 0 0.25rem;
+    font-size: 14px;
+    font-weight: normal;
+    color: v.$red;
+  }
+  .list-body-contents{
+    display: contents;
+    &:nth-of-type(odd){
+      background: v.$baseColor;
+      >div{
+        background: v.$baseColor;
+      }
+    }
+    &.not-selected{
+      background: #9C9C9C;
+      &:nth-of-type(odd){
+        background: #9C9C9C;
+        >div{
+          background: #9C9C9C;
+        }
+      }
+    }
+    .not-selected{
+      background: #9C9C9C;
+    }
+    >div{
+      padding:8px;
+      border-top: 1px solid v.$mainColor;
+      border-right: 1px solid v.$mainColor;
+    }
+    &#list-body-head{
+      >div{
+        background: v.$mainColor;
+        color: #ffffff;
+      }
+    }
+    .selected-item{
+      text-align: center;
+    }
+  }
+  &.list{
+    display: block;
+    border-left: none;
+    border-top: 1px solid v.$mainColor;
+    #list-body-head{
+      display: none;
+    }
+    .list-body-contents{
+      display: block;
+      border-bottom: 1px solid v.$mainColor;
+      >div{
+        display: inline-block;
+        border-color: transparent;
+      }
+      .item-title{
+        display: block;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      .item-genre,.item-pub,.item-list{
+        position: relative;
+        padding-left: 18px;
+      }
+      .item-genre::before,.item-pub::before,.item-list::before{
+        position: absolute;
+        top:50%;
+        left: 0;
+        content: "";
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        transform: translateY(-50%);
+      }
+      .item-genre::before{
+        width: 16px;
+        height: 16px;
+        background: url('../images/ico-tags.png') no-repeat;
+        background-size: contain;
+      }
+      .item-pub::before{
+        width: 16px;
+        height: 16px;
+        background: url('../images/ico-building.png') no-repeat;
+        background-size: contain;
+      }
+      .item-list::before{
+        width: 12px;
+        height: 12px;
+        background: url('../images/ico-mark.png') no-repeat;
+        background-size: contain;
+      }
+      .schedule-wrap{
+        display: none;
+        flex-wrap: wrap;
+        align-items: center;
+        &.has{
+          display: flex;
+          .schedule-head{
+            position: relative;
+            padding: 0.25rem 0.75rem;
+            margin-right: 1rem;
+            font-size: 14px;
+            background: v.$mainColor;
+            color: #ffffff;
+            &::after{
+              position: absolute;
+              top:0;
+              right: -2rem;
+              width: 2rem;
+              height: 100%;
+              content: "";
+              border-top:0.75rem solid transparent;
+              border-bottom:0.75rem solid transparent;
+              border-left: 0.75rem solid v.$mainColor;
+            }
+          }
+        }
+        .schedule-detail{
+          span{
+            padding: 0.25rem 0.5rem;
+          }
+        }
+      }
+      .selected-item{
+        display: block;
+        text-align: left;
+      }
+    }
+  }
+}
